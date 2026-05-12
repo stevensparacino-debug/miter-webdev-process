@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MITER Web Dev Process — BOL Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --graphite: #353D50;
+  --orange: #F85E32;
+  --cyan: #7BEDF8;
+  --gray: #8B8586;
+  --light-gray: #EEEEEE;
+  --white: #FFFFFF;
+  --surface: #F7F7F5;
+  --border: #E2E2DE;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--surface);
+  color: var(--graphite);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── TOP NAV ── */
+nav {
+  background: var(--graphite);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--orange);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: white;
+  letter-spacing: -0.5px;
+}
+.nav-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.02em;
+}
+.nav-tag {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--graphite);
+  padding: 24px 40px 20px;
+  border-bottom: 3px solid var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero h1 {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.hero h1 strong {
+  font-weight: 600;
+  color: var(--cyan);
+}
+.hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  max-width: 480px;
+  line-height: 1.5;
+}
+.hero-meta {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--mono);
+}
+.hero-meta-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ── LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 56px - 200px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 32px 0;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.sidebar-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 0 24px;
+  margin-bottom: 12px;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+.sidebar-item:hover { background: var(--surface); }
+.sidebar-item.active {
+  border-left-color: var(--orange);
+  background: #FFF4F1;
+}
+.sidebar-item.active .step-num { background: var(--orange); color: white; }
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--light-gray);
+  color: var(--gray);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--mono);
+  transition: all 0.15s;
+}
+.step-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--graphite);
+  line-height: 1.3;
+}
+.sidebar-item.active .step-label { font-weight: 500; }
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 24px;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  padding: 48px 56px;
+  max-width: 860px;
+}
+
+.stage { display: none; }
+.stage.active { display: block; }
+
+.stage-header {
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.stage-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.stage-header h2 {
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--graphite);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.stage-header h2 strong { font-weight: 600; }
+.stage-desc {
+  font-size: 14px;
+  color: var(--gray);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+/* ── PROCESS RULE BOX ── */
+.rule-box {
+  background: var(--graphite);
+  color: white;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.rule-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rule-content {}
+.rule-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+.rule-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+/* ── EMAIL THREAD ── */
+.thread-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.thread-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.email-chain { margin-bottom: 40px; }
+
+.email {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: box-shadow 0.15s;
+}
+.email:hover { box-shadow: 0 2px 12px rgba(53,61,80,0.08); }
+
+.email-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.avatar.client { background: #FFF0EC; color: var(--orange); }
+.avatar.bol { background: #E8F4FF; color: #0070E0; }
+.avatar.dev { background: #F0FFF0; color: #319829; }
+.avatar.auto { background: var(--light-gray); color: var(--gray); }
+
+.email-meta { flex: 1; min-width: 0; }
+.email-from {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--graphite);
+}
+.email-sub {
+  font-size: 12px;
+  color: var(--gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.email-date {
+  font-size: 11px;
+  color: var(--gray);
+  font-family: var(--mono);
+  flex-shrink: 0;
+}
+.email-role-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+.badge-client { background: #FFF0EC; color: var(--orange); border: 1px solid #FDD0C4; }
+.badge-bol { background: #E8F4FF; color: #0070E0; border: 1px solid #C2DCFF; }
+.badge-dev { background: #F0FFF0; color: #319829; border: 1px solid #C6EFC6; }
+.badge-auto { background: var(--light-gray); color: var(--gray); border: 1px solid var(--border); }
+
+.email-body {
+  padding: 14px 16px;
+  display: none;
+}
+.email-body.open { display: block; }
+.email-body p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--graphite);
+  margin-bottom: 8px;
+}
+.email-body p:last-child { margin-bottom: 0; }
+.email-snippet {
+  font-size: 13px;
+  color: var(--graphite);
+  background: var(--surface);
+  border-left: 3px solid var(--orange);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  font-family: var(--mono);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+.email-link {
+  font-size: 11px;
+  color: #0070E0;
+  font-family: var(--mono);
+  word-break: break-all;
+  background: #F0F6FF;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+  display: inline-block;
+}
+.annotation {
+  background: #FFFBEB;
+  border: 1px solid #F5E8B0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #7A6200;
+  line-height: 1.6;
+}
+.annotation strong { font-weight: 600; }
+
+.expand-toggle {
+  font-size: 11px;
+  color: var(--gray);
+  font-family: var(--mono);
+  padding: 0 16px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.expand-toggle:hover { color: var(--orange); }
+
+/* ── DECISION FORK ── */
+.fork {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.fork-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: var(--white);
+}
+.fork-card.complex { border-top: 3px solid var(--orange); }
+.fork-card.simple { border-top: 3px solid var(--cyan); }
+.fork-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.fork-card.complex .fork-label { color: var(--orange); }
+.fork-card.simple .fork-label { color: #2AABB5; }
+.fork-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--graphite);
+  margin-bottom: 6px;
+}
+.fork-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.fork-example {
+  margin-top: 10px;
+  font-size: 12px;
+  font-family: var(--mono);
+  background: var(--surface);
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--graphite);
+  line-height: 1.5;
+}
+
+/* ── CHECKLIST ── */
+.checklist { margin-bottom: 32px; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.check-box svg { width: 10px; height: 10px; }
+.check-text { font-size: 13px; color: var(--graphite); line-height: 1.5; }
+.check-text span { font-weight: 500; }
+
+/* ── NAV FOOTER ── */
+.stage-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--graphite);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+.nav-btn.primary { background: var(--orange); color: white; border-color: var(--orange); }
+.nav-btn.primary:hover { background: #D94E26; border-color: #D94E26; color: white; }
+.nav-btn.disabled { opacity: 0.3; pointer-events: none; }
+.stage-progress {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gray);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--graphite);
+  color: rgba(255,255,255,0.35);
+  font-size: 12px;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+}
+footer strong { color: rgba(255,255,255,0.6); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main { padding: 32px 24px; }
+  .hero { padding: 40px 24px; }
+  nav { padding: 0 24px; }
+  .fork { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">BOL</div>
+    <span class="nav-title">MITER web dev process</span>
+  </div>
+  <span class="nav-tag">internal reference · v1.0</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">BOL Agency × MITER Brands</div>
+  <h1>Web dev process <strong>walkthrough</strong></h1>
+  <p class="hero-sub">A step-by-step breakdown of how web development requests move from submission to deployment — with real email examples from the MITER account.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item"><span class="hero-meta-dot"></span>Drupal / brand sites</span>
+    <span class="hero-meta-item"><span class="hero-meta-dot"></span>Dealer Portal</span>
+    <span class="hero-meta-item"><span class="hero-meta-dot"></span>11 process stages</span>
+    <span class="hero-meta-item"><span class="hero-meta-dot"></span>Real email examples</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-label">Process stages</div>
+  <a class="sidebar-item active" onclick="showStage(1)" href="#">
+    <span class="step-num">1</span>
+    <span class="step-label">Ticket submitted</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(2)" href="#">
+    <span class="step-num">2</span>
+    <span class="step-label">Auto-routed to board</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(3)" href="#">
+    <span class="step-num">3</span>
+    <span class="step-label">Auto-response sent</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(4)" href="#">
+    <span class="step-num">4</span>
+    <span class="step-label">PM confirm-receipt</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(5)" href="#">
+    <span class="step-num">5</span>
+    <span class="step-label">Triage: simple vs. complex</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(6)" href="#">
+    <span class="step-num">6</span>
+    <span class="step-label">Dev builds + notifies BOL</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(7)" href="#">
+    <span class="step-num">7</span>
+    <span class="step-label">BOL internal review</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(8)" href="#">
+    <span class="step-num">8</span>
+    <span class="step-label">PM sends to client</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(9)" href="#">
+    <span class="step-num">9</span>
+    <span class="step-label">Client review</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(10)" href="#">
+    <span class="step-num">10</span>
+    <span class="step-label">Deployment</span>
+  </a>
+  <a class="sidebar-item" onclick="showStage(11)" href="#">
+    <span class="step-num">11</span>
+    <span class="step-label">Task closed</span>
+  </a>
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-label">Legend</div>
+  <div style="padding: 0 24px; display: flex; flex-direction: column; gap: 8px;">
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><div style="width:10px;height:10px;border-radius:50%;background:#FFF0EC;border:1.5px solid var(--orange)"></div>Client email</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><div style="width:10px;height:10px;border-radius:50%;background:#E8F4FF;border:1.5px solid #0070E0"></div>BOL response</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><div style="width:10px;height:10px;border-radius:50%;background:#F0FFF0;border:1.5px solid #319829"></div>Dev (Adam's team)</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><div style="width:10px;height:10px;border-radius:50%;background:var(--light-gray);border:1.5px solid var(--border)"></div>Automation</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- STAGE 1 -->
+<section id="stage-1" class="stage active">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 01 of 11</div>
+    <h2>Ticket <strong>submitted</strong></h2>
+    <p class="stage-desc">A request enters the process from the client or internal team — via direct email, an email forward to Monday, or in-meeting. This is the trigger for everything that follows.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📌</span>
+    <div class="rule-content">
+      <div class="rule-title">How requests arrive</div>
+      <div class="rule-text">Three common entry points: (1) client emails Steve or the team directly, (2) client or internal team submits to Monday via email forward, (3) a verbal request surfaces on a sync call and needs to be captured manually. The first two trigger Monday automations. The third requires manual ticket creation.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — PGT tech resources error (May 7)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">CB</div>
+        <div class="email-meta">
+          <div class="email-from">Caiden (MITER / Anlin)</div>
+          <div class="email-sub">Re: Question — PGT tech resources page is experiencing an error</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">May 7</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">@Adam Hermsdorfer @Steve Sparacino
+
+PGT's tech resources page is experiencing an error — could you check in on this??
+https://www.pgtwindows.com/technical-resources</div>
+        <div class="annotation"><strong>What's happening:</strong> Caiden is tagging both Steve and Adam directly in a reply chain. No formal ticket yet — this is the raw moment of request entry.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — C650 discontinuation (Apr 28)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">JD</div>
+        <div class="email-meta">
+          <div class="email-from">Jen (Western Windows)</div>
+          <div class="email-sub">C650 Windows & Doors Discontinuation</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">Apr 28</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Steve,
+
+We are discontinuing the C650 Window and Door line, and I am attempting to remove and forward all C650 products to the C700. I have done the work on the back end but am still seeing some issues...</div>
+        <div class="annotation"><strong>What's happening:</strong> Direct inbound email from client with a time-sensitive request. Copied to Meredith, Sarah, Nick, and Caiden — wide distribution signals urgency.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Sunrise Triton landing page (Apr 30)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">NB</div>
+        <div class="email-meta">
+          <div class="email-from">Nick (MITER)</div>
+          <div class="email-sub">Sunrise Triton Landing Page</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">Apr 30</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Steve-
+
+Please add this landing page build-out to the queue for the sunrise site to be ready in UAT/Stage by 5/26 with a go live in June.
+
+@Caiden Brown / @Jenifer Davenport can you ensure this ends up in the right place?</div>
+        <div class="annotation"><strong>What's happening:</strong> Nick submitting directly to Steve by name with a clear scope and timeline. This is the cleanest type of submission — scoped, dated, direct.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn disabled">← Previous</button>
+    <span class="stage-progress">1 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(2)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 2 -->
+<section id="stage-2" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 02 of 11</div>
+    <h2>Auto-routed to <strong>Monday board</strong></h2>
+    <p class="stage-desc">Once a request lands, Steve forwards it to the correct Monday board via email — either the Drupal board or the Dealer Portal board — triggering the automation pipeline.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">⚙️</span>
+    <div class="rule-content">
+      <div class="rule-title">Routing logic</div>
+      <div class="rule-text">Forwarding to <strong style="color:var(--cyan)">miterdrupal@bol-agency-unit.us.monday.com</strong> routes to the Drupal / Brand Sites board (9461559614). Forwarding to <strong style="color:var(--cyan)">dealerportal@bol-agency-unit.us.monday.com</strong> routes to the Dealer Portal board (9420079319). Priority and assignment are then set manually or via automation.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — PGT tech resources forwarded to Drupal board</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Monday (Drupal board)</div>
+          <div class="email-sub">Fwd: Question — forwarded to board</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 7, 11:59 AM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">---------- Forwarded message ---------
+From: Caiden Brown <caiden@anlin.com>
+To: miterdrupal@bol-agency-unit.us.monday.com
+
+PGT's tech resources page is experiencing an error — could you check in on this??
+https://www.pgtwindows.com/technical-resources</div>
+        <div class="annotation"><strong>What's happening:</strong> Steve forwards Caiden's email directly to the Monday board email address. This creates a new item on the board and triggers the auto-response automation. The full forward time from Caiden's email to this forward: ~2 minutes.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Milgard Parts Books forwarded to Dealer Portal board</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Monday (Dealer Portal board)</div>
+          <div class="email-sub">Fwd: Milgard Parts Books - BOL</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 12, 12:42 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">---------- Forwarded message ---------
+From: Sarah Rockwood <sarah.rockwood@bol-agency.com>
+To: dealerportal@bol-agency-unit.us.monday.com
+
+[forwarded thread: Milgard Parts Books - BOL]</div>
+        <div class="annotation"><strong>What's happening:</strong> Internal BOL team member (Sarah) flagged a new request from Nick. Steve routes it to the correct board — Dealer Portal — since it's portal-scope work, not Drupal/brand site.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(1)">← Previous</button>
+    <span class="stage-progress">2 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(3)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 3 -->
+<section id="stage-3" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 03 of 11</div>
+    <h2>Auto-response <strong>sent</strong></h2>
+    <p class="stage-desc">Monday's automation fires immediately when a ticket is created — sending a confirmation update back to the item and notifying the assigned owner (Steve) that a new request has been logged.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">🤖</span>
+    <div class="rule-content">
+      <div class="rule-title">What the automation does</div>
+      <div class="rule-text">Monday fires two automatic actions: (1) posts a formatted update to the item thread thanking the requester and logging the submission details, (2) assigns Steve as owner and sends an assignment notification email. This creates an audit trail before any human action is taken.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Monday automation on PGT Dealer Locator issue</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar auto">M</div>
+        <div class="email-meta">
+          <div class="email-from">Monday Automations</div>
+          <div class="email-sub">[New update] "PGT | Web Dev | Dealer Locator Issue" — Thank you Caiden Brown for adding...</div>
+        </div>
+        <span class="email-role-badge badge-auto">Automation</span>
+        <span class="email-date">May 12, 1:16 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Automations wrote an update on PGT | Web Dev | Dealer Locator Issue
+MITER | Drupal Development Task Board — IN PROGRESS / IN THE QUEUE
+
+12 May 13:16
+"Thank you Caiden Brown for adding the new request: [request details]"</div>
+        <div class="annotation"><strong>What's happening:</strong> The auto-update fires within seconds of the item being created. Note the board group: "IN PROGRESS / IN THE QUEUE" — this is the working group that feeds the Priority View used for client-facing reports.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar auto">M</div>
+        <div class="email-meta">
+          <div class="email-from">Monday Automations</div>
+          <div class="email-sub">[You're assigned] PGT | Web Dev | Dealer Locator Issue</div>
+        </div>
+        <span class="email-role-badge badge-auto">Automation</span>
+        <span class="email-date">May 12, 1:16 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Automations assigned you to:
+PGT | Web Dev | Dealer Locator Issue
+
+MITER | Drupal Development Task Board
+IN PROGRESS / IN THE QUEUE
+
+[View Item]</div>
+        <div class="annotation"><strong>What's happening:</strong> Assignment email fires simultaneously with the update. Steve is notified by email that he's now the owner of this item — this is the hand-off trigger that starts the PM intake phase.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(2)">← Previous</button>
+    <span class="stage-progress">3 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(4)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 4 -->
+<section id="stage-4" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 04 of 11</div>
+    <h2>PM <strong>confirm-receipt</strong></h2>
+    <p class="stage-desc">Steve sends a human confirmation back to the client — acknowledging the request, linking the Monday item, and setting expectations. This is the first human touchpoint after automation.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">✉️</span>
+    <div class="rule-content">
+      <div class="rule-title">The confirm-receipt pattern</div>
+      <div class="rule-text">Every confirmation email follows the same structure: (1) thank the requester by name, (2) confirm receipt explicitly, (3) share the Monday task link for reference, (4) set a clear expectation on next steps. The Monday hyperlink is critical — it closes the loop between email and board.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — PGT tech resources confirm-receipt</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Caiden, Nick, Adam</div>
+          <div class="email-sub">Re: Question — confirming receipt</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 7, 12:05 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Caiden,
+
+Thanks for flagging, and confirming receipt! We will review this further with the team to diagnose the error on the Technical Resources page and will provide an update shortly. I'll keep you posted.</div>
+        <div class="annotation"><strong>Pattern in action:</strong> Named greeting → confirm receipt → clear next step ("provide an update shortly") → leaves door open. Response time from Caiden's email: ~8 minutes.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — C650 confirm-receipt with Monday link</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Jen, Meredith, Sarah, Nick, Caiden</div>
+          <div class="email-sub">Re: C650 Windows & Doors Discontinuation</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">Apr 28, 1:30 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Thank you Jen -- confirming receipt
+
+Added this as a critical item to the queue:
+https://bol-agency-unit.monday.com/boards/9461559614/views/216452039/pulses/11870659881
+
+We will do our best to make this a priority. Keep you posted on progress.</div>
+        <span class="email-link">monday.com/boards/9461559614/views/216452039/pulses/11870659881</span>
+        <div class="annotation"><strong>Key detail:</strong> Steve flags this as "critical" — signaling internal priority escalation to Adam's team. The Monday link anchors the paper trail. Note the Priority View ID (216452039) is used — this is the client-facing view.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Sunrise Triton landing page confirm-receipt</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Nick, Jen, Caiden</div>
+          <div class="email-sub">Re: Sunrise Triton Landing Page</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">Apr 30, 1:40 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Thanks Nick -- added to monday for tracking
+
+Keep you and team posted as we progress</div>
+        <div class="annotation"><strong>Lighter-touch confirm:</strong> When Nick submits a pre-scoped request with clear dates, the confirm-receipt is brief — acknowledge, log, commit to updates. No need to repeat what he already told us.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(3)">← Previous</button>
+    <span class="stage-progress">4 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(5)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 5 -->
+<section id="stage-5" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 05 of 11</div>
+    <h2>Triage: <strong>simple vs. complex</strong></h2>
+    <p class="stage-desc">Based on priority and complexity, the request is assessed internally. Simple requests go straight into the weekly sprint. Complex requests get scoped (S / M / L) and scheduled accordingly.</p>
+  </div>
+
+  <div class="fork">
+    <div class="fork-card complex">
+      <div class="fork-label">Complex path</div>
+      <div class="fork-title">Scoped: S / M / L</div>
+      <div class="fork-desc">Requires full dev review. A rough scope gauge is assigned before dev begins. Work is scheduled based on capacity and backlog.</div>
+      <div class="fork-example">Example: Milgard OIC → Jitterbit migration, Western Windows new site, BazaarVoice feed rebuild</div>
+    </div>
+    <div class="fork-card simple">
+      <div class="fork-label">Simple path</div>
+      <div class="fork-title">Weekly sprint queue</div>
+      <div class="fork-desc">Adam picks these up in the regular sprint cadence. Fast turnaround, minimal coordination overhead.</div>
+      <div class="fork-example">Example: PGT tech resources error, C650 product removal, copy overrides</div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">🔀</span>
+    <div class="rule-content">
+      <div class="rule-title">How triage happens in practice</div>
+      <div class="rule-text">There's no formal scoring system — triage happens through conversation between Steve and Adam. The Monday board due date, priority column, and any scope notes added to the item's update thread serve as the running record. Critical/urgent items get flagged immediately in a separate email or Slack to Adam outside the formal board flow.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — urgent escalation to Adam (C650)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Adam, Sarah</div>
+          <div class="email-sub">Fwd: C650 Windows & Doors Discontinuation</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">Apr 28, 1:32 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hey Adam -- sorry but it seems Jen is forwarding another urgent item that needs to be done today by 6pm ET...
+
+I'll be sharing the priority list today with Nick and team due to budget + current workload...</div>
+        <div class="annotation"><strong>The real triage moment:</strong> This internal forward to Adam is where true urgency gets communicated. Steve flags the 6pm deadline explicitly — this is outside the formal Monday flow. The informal escalation channel (direct email to Adam) is a key part of how urgent items actually get prioritized.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Export question queued with due date</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">NB</div>
+        <div class="email-meta">
+          <div class="email-from">Nick (MITER)</div>
+          <div class="email-sub">Re: Export Question — get this into the queue with a 5/22 due date</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">May 11</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Thanks, Adam, for confirming the possibility!
+
+@Steve Sparacino, can you get this into the queue with a 5/22 due date?</div>
+        <div class="annotation"><strong>Client-directed triage:</strong> Nick occasionally self-assigns priority and due dates — here he's directing Steve to queue it for 5/22. This signals it's not urgent today but has a real deadline.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Nick (+ Adam cc)</div>
+          <div class="email-sub">Re: Export Question — added to queue</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 11, 2:52 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Nick,
+
+Thank you for sending this over! Added to the queue in monday with a due date of 5/22
+https://bol-agency-unit.monday.com/boards/9461559614/views/216452039/pulses/11982097019</div>
+        <span class="email-link">monday.com/boards/9461559614/views/216452039/pulses/11982097019</span>
+        <div class="annotation"><strong>Clean close:</strong> Steve logs it, links it, done. Simple request → sprint queue. No extra commentary needed.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(4)">← Previous</button>
+    <span class="stage-progress">5 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(6)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 6 -->
+<section id="stage-6" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 06 of 11</div>
+    <h2>Dev builds + <strong>notifies BOL</strong></h2>
+    <p class="stage-desc">Adam's team implements the work and sends an internal update — either via Monday, email, or both — letting BOL know the build is ready for review before it goes to the client.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">🛠️</span>
+    <div class="rule-content">
+      <div class="rule-title">Dev communication pattern</div>
+      <div class="rule-text">Adam typically sends a brief, direct email with: what was done, a staging link or environment credentials if applicable, and any notes or caveats. If there are blockers or questions, he flags them here before BOL review — not after the client sees it.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Milgard OIC / API migration (Apr 22)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar dev">AH</div>
+        <div class="email-meta">
+          <div class="email-from">Adam → Mary (cc Steve, Nick)</div>
+          <div class="email-sub">Re: MITER / Milgard - API endpoints moving to new OIC middleware platform</div>
+        </div>
+        <span class="email-role-badge badge-dev">Dev</span>
+        <span class="email-date">Apr 22</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hey Mary,
+
+We spun up a new site at https://middleware-milgard-miter.pantheonsite.io/
+passwords: Miter / Miter2026
+
+The structure from the response was different but we were able to make the code work. Ready for your testing.</div>
+        <span class="email-link">middleware-milgard-miter.pantheonsite.io</span>
+        <div class="annotation"><strong>What's happening:</strong> Adam stood up a Pantheon staging instance and sent Mary credentials directly. Note he copied Steve — this keeps BOL in the loop even on a dev-to-client-tech direct thread. The "structure was different but we made it work" note is key context for BOL review.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — PGT tech resources resolved (May 7)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar dev">AH</div>
+        <div class="email-meta">
+          <div class="email-from">Adam → Steve (cc Caiden, Nick)</div>
+          <div class="email-sub">Re: Question — page is up now</div>
+        </div>
+        <span class="email-role-badge badge-dev">Dev</span>
+        <span class="email-date">May 7, 12:36 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hey Caiden, we have that page up now.
+
+Please let me know if you need anything else.
+
+Adam</div>
+        <div class="annotation"><strong>Fast turnaround:</strong> From Caiden's report (~11:56 AM) to Adam's fix confirmation (~12:36 PM) = ~40 minutes. Simple bug, fast path through the process. Note Adam went direct to Caiden here — Steve is CC'd but this is a clean, quick close.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(5)">← Previous</button>
+    <span class="stage-progress">6 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(7)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 7 -->
+<section id="stage-7" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 07 of 11</div>
+    <h2>BOL <strong>internal review</strong></h2>
+    <p class="stage-desc">Before the work reaches the client, BOL reviews it internally. This is the quality gate — Steve (and where relevant, Sarah or Meredith) checks the work and either approves it to move forward or routes feedback back to Adam.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">🔍</span>
+    <div class="rule-content">
+      <div class="rule-title">What BOL checks for</div>
+      <div class="rule-text">Functional accuracy (does it do what was asked?), brand/content alignment (does it match client expectations?), and scope check (did anything unexpected surface?). If there's a blocker or mismatch, BOL escalates internally before the client ever sees it. This stage protects the client relationship.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — redirect mismatch flagged before client delivery</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar dev">AH</div>
+        <div class="email-meta">
+          <div class="email-from">Adam → Steve, Sarah, Meredith, Chris</div>
+          <div class="email-sub">Re: MITER Drupal Web-Dev — May Priorities</div>
+        </div>
+        <span class="email-role-badge badge-dev">Dev</span>
+        <span class="email-date">May 5, 2:18 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hey Steve,
+
+For both the two redirect sheets, neither of the redirect sheets provided matched the URL's on the current site. I just commented on a separate thread regarding PGT that noted this...</div>
+        <div class="annotation"><strong>Internal flag before client:</strong> Adam surfaced a data mismatch (redirect sheets don't match live URLs) directly to the BOL team first — not to the client. This is the internal review gate working correctly: catching issues before they reach Nick's team.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Adam, Sarah, Meredith, Chris</div>
+          <div class="email-sub">Re: MITER Drupal Web-Dev — May Priorities</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 5, 2:28 PM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Thank you Adam for your responses
+
+I guess I'm not understanding the disconnect -- can we jump on a call to align on both SRC and PGT redirects today?</div>
+        <div class="annotation"><strong>BOL escalation response:</strong> When a written thread isn't resolving the disconnect, Steve calls for a sync. This keeps the issue internal and prevents it from becoming a client-facing problem. The call happens before any update goes to Nick.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(6)">← Previous</button>
+    <span class="stage-progress">7 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(8)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 8 -->
+<section id="stage-8" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 08 of 11</div>
+    <h2>PM sends to <strong>client</strong></h2>
+    <p class="stage-desc">Once BOL approves the work, Steve sends it to the client for review — via email, a Monday update, or both. The dual-channel approach ensures nothing falls through the cracks.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">📤</span>
+    <div class="rule-content">
+      <div class="rule-title">Dual-channel delivery</div>
+      <div class="rule-text">For most deliverables, Steve sends a Monday update (which emails the watchers) AND a direct email — especially for anything with a staging link, credentials, or feedback deadline. The Monday thread creates the audit trail; the direct email ensures visibility for client stakeholders who may not watch Monday closely.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Sunrise Triton landing page sent for client review</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Nick (via Monday update)</div>
+          <div class="email-sub">[New update] "Sunrise | Web Dev | Triton..." — Hi Nick, hope you had a nice weekend...</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 11</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi @Nick Board - hope you had a nice weekend 👋
+
+[Monday update sharing the Triton landing page build for review]
+
+Please review and let us know any feedback — Hallie and Caiden are also tagged for visibility.</div>
+        <div class="annotation"><strong>Monday-first delivery:</strong> Steve posted the client-facing update directly on the Monday item, which triggers email notifications to all watchers (Nick, Hallie, Caiden). This is the Monday-as-comms-channel pattern in action.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(7)">← Previous</button>
+    <span class="stage-progress">8 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(9)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 9 -->
+<section id="stage-9" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 09 of 11</div>
+    <h2>Client <strong>review</strong></h2>
+    <p class="stage-desc">The client reviews the delivered work. Two paths: they approve and we move to deployment, or they provide feedback and we route back to Adam's team to rectify.</p>
+  </div>
+
+  <div class="fork">
+    <div class="fork-card simple">
+      <div class="fork-label" style="color:#319829">Approved</div>
+      <div class="fork-title">→ Deployment queue</div>
+      <div class="fork-desc">Client signs off. Work is queued for production deployment — typically that night or the following morning, or batched if there are multiple items.</div>
+    </div>
+    <div class="fork-card complex">
+      <div class="fork-label">Feedback received</div>
+      <div class="fork-title">→ Back to dev</div>
+      <div class="fork-desc">Client feedback is consolidated and routed back to Adam's team. The loop repeats from Stage 6 until approval is reached.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Hallie can't access review page (Sunrise Triton)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">HS</div>
+        <div class="email-meta">
+          <div class="email-from">Hallie (MITER)</div>
+          <div class="email-sub">Re: Sunrise landing page — authorization issue</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">May 11, 10:33 AM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Team,
+
+It's saying I don't have authorization to view the content.
+
+Thanks, Hallie Siwik — MITER Brands</div>
+        <div class="annotation"><strong>Access blocker mid-review:</strong> Hallie hit a Drupal permissions issue on the unpublished staging page. This stalls the review loop — Steve needs to resolve before client feedback can proceed.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar bol">SS</div>
+        <div class="email-meta">
+          <div class="email-from">Steve → Hallie (cc Caiden, Nick)</div>
+          <div class="email-sub">Re: Sunrise landing page — access granted</div>
+        </div>
+        <span class="email-role-badge badge-bol">BOL</span>
+        <span class="email-date">May 11, 10:43 AM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Hallie,
+
+Thanks for reaching out! Since this page is unpublished on the site, you'll need credentials to log in to the admin area to see the page. I added you as a user so you can login to see it. Let me know if you need anything else!</div>
+        <div class="annotation"><strong>Quick unblock:</strong> 10-minute response, issue resolved. Steve added Hallie as a Drupal user — a small action that unblocks the entire review. Nick's response said "Beat me to it!" confirming Steve got there first.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">NB</div>
+        <div class="email-meta">
+          <div class="email-from">Nick → Steve</div>
+          <div class="email-sub">Re: Sunrise landing page</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">May 11, 10:52 AM</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Beat me to it!
+
+Nick Board — Director of Digital Marketing, MITER Brands</div>
+        <div class="annotation"><strong>Positive signal:</strong> Nick acknowledging Steve got to it before he could. This is the kind of response speed that builds client trust. Nick then added a Ziflow proof link for easier commenting.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Milgard API client provides feedback</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">MM</div>
+        <div class="email-meta">
+          <div class="email-from">Mary (Milgard)</div>
+          <div class="email-sub">RE: MITER / Milgard - API endpoints — cancelled order error</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">Apr 29</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Adam,
+
+When testing a cancelled order, the promo site is advancing to the next screen to enter name, address, etc. Shouldn't it stop with error "SO number is ineligible" like it does in example 2?</div>
+        <div class="annotation"><strong>Feedback loop triggered:</strong> Mary found a specific bug in QA testing. The work goes back to Adam with a clear, documented reproduction case. This is the feedback → dev → re-review cycle in action.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(8)">← Previous</button>
+    <span class="stage-progress">9 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(10)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 10 -->
+<section id="stage-10" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 10 of 11</div>
+    <h2>Deployed to <strong>production</strong></h2>
+    <p class="stage-desc">Once client approval is received, the work is deployed to the live site — typically overnight or the morning after approval, or batched if there are multiple items queued that week.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">🚀</span>
+    <div class="rule-content">
+      <div class="rule-title">Deployment cadence</div>
+      <div class="rule-text">Standard deployment is night-of or morning-after client approval. When there's a queue of items, Curt or Adam batches them into a single deployment window. Adam or Curt sends a confirmation note — either via Monday update or direct email — once the code is live. Steve then sends the final confirmation to the client.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — PGT lightbox deployment (Dealer Portal sync, May 11)</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar dev">CL</div>
+        <div class="email-meta">
+          <div class="email-from">Curt (BOL / Portal)</div>
+          <div class="email-sub">Dealer Portal sync — PGT lightbox push live tonight</div>
+        </div>
+        <span class="email-role-badge badge-dev">Dev</span>
+        <span class="email-date">May 11 sync</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">[From meeting recap, May 11 Dealer Portal sync]
+
+Curt moved PGT lightbox content to production and intends to push the code live tonight.
+
+Action item: Curt Loughin will push the PGT lightbox/code live tonight.</div>
+        <div class="annotation"><strong>Batched deployment confirmed in sync:</strong> Content is already in production; the code push is the final step. The meeting recap creates the deployment record. Steve will follow up with client confirmation once it's live.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(9)">← Previous</button>
+    <span class="stage-progress">10 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(11)">Next →</button>
+  </div>
+</section>
+
+<!-- STAGE 11 -->
+<section id="stage-11" class="stage">
+  <div class="stage-header">
+    <div class="stage-eyebrow">Stage 11 of 11</div>
+    <h2>Task <strong>closed</strong></h2>
+    <p class="stage-desc">Steve confirms deployment to the client, the Monday item is marked complete, and the task is officially closed — unless the client comes back with post-deployment feedback, which restarts the dev loop.</p>
+  </div>
+
+  <div class="rule-box">
+    <span class="rule-icon">✅</span>
+    <div class="rule-content">
+      <div class="rule-title">Closure pattern</div>
+      <div class="rule-text">Closure requires two things: (1) Steve sends the client a confirmation that the work is live, and (2) the Monday item status is updated to Done/Complete. If the client comes back with post-deployment issues, the item re-opens and routes back to dev before final close. The goal is a clean paper trail from submission to closure.</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Real example — Milgard API: client confirms testing, ready for prod</div>
+  <div class="email-chain">
+    <div class="email">
+      <div class="email-header" onclick="toggleEmail(this)">
+        <div class="avatar client">MM</div>
+        <div class="email-meta">
+          <div class="email-from">Mary (Milgard)</div>
+          <div class="email-sub">RE: MITER / Milgard API — ready to launch in production</div>
+        </div>
+        <span class="email-role-badge badge-client">Client</span>
+        <span class="email-date">Apr 22</span>
+      </div>
+      <div class="email-body">
+        <div class="email-snippet">Hi Adam,
+
+Thanks for setting up the website test instance. I'll do some verification for promo-registration over the next few days and then we can launch in production. I'll be in touch.
+
+Mary</div>
+        <div class="annotation"><strong>Client-initiated closure signal:</strong> Mary commits to verifying and then greenlit for production. This is the hand-off moment that moves the item into the deployment queue. Steve stays CC'd to track.</div>
+      </div>
+      <div class="expand-toggle" onclick="toggleEmail(this.previousElementSibling.previousElementSibling)">▸ show email</div>
+    </div>
+  </div>
+
+  <div class="thread-label">Complete journey — PGT tech resources (45 min start to close)</div>
+  <div class="checklist">
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>11:56 AM</span> — Caiden flags PGT tech resources error via email</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>11:59 AM</span> — Steve forwards to Drupal Monday board (+3 min)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>12:05 PM</span> — Steve sends confirm-receipt to Caiden (+6 min)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>12:07 PM</span> — Caiden reacts with a thumbs up (+2 min)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>12:36 PM</span> — Adam confirms page is live (+29 min)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="check-text"><span>~12:40 PM</span> — Task closed. Total: ~45 minutes from report to live fix.</div>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <button class="nav-btn" onclick="showStage(10)">← Previous</button>
+    <span class="stage-progress">11 / 11</span>
+    <button class="nav-btn primary" onclick="showStage(1)">↺ Start over</button>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <span>Built by <strong>BOL Agency</strong> — internal reference only</span>
+  <span>MITER Brands web dev process · v1.0 · May 2026</span>
+</footer>
+
+<script>
+function showStage(n) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('stage-' + n).classList.add('active');
+  document.querySelectorAll('.sidebar-item')[n - 1].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleEmail(header) {
+  const body = header.nextElementSibling;
+  const toggle = body.nextElementSibling;
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    if (toggle) toggle.textContent = '▸ show email';
+  } else {
+    body.classList.add('open');
+    if (toggle) toggle.textContent = '▾ hide email';
+  }
+}
+</script>
+</body>
+</html>
