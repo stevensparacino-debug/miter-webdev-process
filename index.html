@@ -723,10 +723,6 @@ footer strong { color: rgba(255,255,255,0.6); }
     <span class="step-num">11</span>
     <span class="step-label">Task closed</span>
   </a>
-  <a class="sidebar-item" onclick="showStage(12)" href="#">
-    <span class="step-num" style="background:#FFF0EC;color:var(--orange);border:1.5px solid var(--orange)">!</span>
-    <span class="step-label">Hiccups &amp; friction points</span>
-  </a>
   <div class="sidebar-divider"></div>
   <div class="sidebar-label">Legend</div>
   <div style="padding: 0 24px; display: flex; flex-direction: column; gap: 8px;">
@@ -1580,113 +1576,6 @@ Mary</div>
   <div class="stage-nav">
     <button class="nav-btn" onclick="showStage(10)">← Previous</button>
     <span class="stage-progress">11 / 11</span>
-    <button class="nav-btn primary" onclick="showStage(12)">Hiccups →</button>
-  </div>
-</section>
-
-<!-- STAGE 12 -->
-<section id="stage-12" class="stage">
-  <div class="stage-header">
-    <div class="stage-eyebrow" style="color:#E05A2B">Observed friction — call #1 discussion</div>
-    <h2>Hiccups &amp; <strong>friction points</strong></h2>
-    <p class="stage-desc">Where the process breaks down, slows down, or goes off-script in practice. Pulled from real email threads and meeting recaps. These are the talking points for the improvement conversation.</p>
-  </div>
-
-  <!-- HICCUP 2 -->
-  <div class="hiccup-card" id="h2">
-    <div class="hiccup-header" onclick="toggleHiccup('h2')">
-      <div class="hiccup-num">01</div>
-      <div class="hiccup-meta">
-        <div class="hiccup-title">Informal escalation channel to Adam outside Monday</div>
-        <div class="hiccup-sub">Communication gap · Urgent items</div>
-      </div>
-      <div class="hiccup-tag tag-comms">Comms gap</div>
-      <div class="hiccup-chevron">▸</div>
-    </div>
-    <div class="hiccup-body">
-      <p>When something is truly urgent, Steve forwards directly to Adam by email — outside the Monday board flow. This works, but it means the urgency signal lives in an inbox thread rather than on the board. Anyone looking at Monday won't see that this item was flagged as a same-day emergency.</p>
-      <div class="hiccup-example">
-        <div class="hiccup-example-label">Real example — C650 urgent escalation (Apr 28)</div>
-        <div class="email-snippet" style="font-size:12px">Steve → Adam, Sarah:
-"Hey Adam -- sorry but it seems Jen is forwarding another urgent item that needs to be done today by 6pm ET..."</div>
-      </div>
-      <div class="hiccup-impact">
-        <span class="impact-dot impact-orange"></span>
-        <strong>Impact:</strong> Urgency context is siloed in email. If Adam is unavailable and someone else checks Monday, they have no idea this was a 6pm-today deadline.
-      </div>
-      <div class="hiccup-question">💬 <strong>Discussion prompt:</strong> Should urgent escalations include a Monday priority flag update in addition to the direct email? Or is a dedicated "HOT" label/group worth adding to the board?</div>
-    </div>
-  </div>
-
-  <!-- HICCUP 3 -->
-  <div class="hiccup-card" id="h3">
-    <div class="hiccup-header" onclick="toggleHiccup('h3')">
-      <div class="hiccup-num">02</div>
-      <div class="hiccup-meta">
-        <div class="hiccup-title">Client scope reversals mid-ticket</div>
-        <div class="hiccup-sub">Scope management · Western Windows</div>
-      </div>
-      <div class="hiccup-tag tag-scope">Scope creep</div>
-      <div class="hiccup-chevron">▸</div>
-    </div>
-    <div class="hiccup-body">
-      <p>Tickets occasionally reverse scope after they've been confirmed and queued. The C650 thread is a clean example — Jen submitted a removal request, Steve confirmed and queued it, then Jen came back with a reversal and a new, different ask. The Monday item reflects the original request, not the updated one.</p>
-      <div class="hiccup-example">
-        <div class="hiccup-example-label">Real example — C650 scope reversal (Apr 28)</div>
-        <div class="email-snippet" style="font-size:12px">Jen → Steve (follow-up, ~48 min later):
-"Hi Steve, Thanks for your email. There has been a reversal of the requested tasks. They do not want technical resources removed, so those are fine. However, here are the issues that I am having: [new scope]..."
-
-Steve → Jen:
-"Thank you Jen -- confirming receipt. I've added this to monday for further internal review + tracking."</div>
-      </div>
-      <div class="hiccup-impact">
-        <span class="impact-dot impact-orange"></span>
-        <strong>Impact:</strong> The original Monday item may not reflect the current ask. Dev could build the wrong thing if they pull from the original ticket without reading the full update thread.
-      </div>
-      <div class="hiccup-question">💬 <strong>Discussion prompt:</strong> Should scope reversals require closing the original item and opening a new one? Or is an update comment with a clear "REVISED SCOPE" flag sufficient?</div>
-    </div>
-  </div>
-
-  <!-- HICCUP 4 -->
-  <div class="hiccup-card" id="h4">
-    <div class="hiccup-header" onclick="toggleHiccup('h4')">
-      <div class="hiccup-num">03</div>
-      <div class="hiccup-meta">
-        <div class="hiccup-title">Dependency stalls waiting on client decisions</div>
-        <div class="hiccup-sub">Blocker management · Portal + Drupal</div>
-      </div>
-      <div class="hiccup-tag tag-blocker">Blocker</div>
-      <div class="hiccup-chevron">▸</div>
-    </div>
-    <div class="hiccup-body">
-      <p>Several active items are stalled not because of dev capacity, but because a client-side decision hasn't been made. The OIC-to-Jitterbit conversion has no response from the client. The order-status integration staging is ready but waiting on Joni or Talena to decide whether to proceed. These items sit open on the board with no clear next action.</p>
-      <div class="hiccup-example">
-        <div class="hiccup-example-label">From the May 11 Dealer Portal sync recap</div>
-        <div class="email-snippet" style="font-size:12px">"The order-status integration is functioning on staging but an upstream field issue requires Joni or Talena to decide whether to proceed or wait for a fix."
-
-"Steve will ping Mary for a status update on the OIC-to-Jitterbit conversion because no response has been received yet."</div>
-      </div>
-      <div class="hiccup-impact">
-        <span class="impact-dot impact-red"></span>
-        <strong>Impact:</strong> Board items look "in progress" but are actually blocked. Without a visible blocker status, it's hard to distinguish items that are actively being worked vs. sitting idle waiting on someone else.
-      </div>
-      <div class="hiccup-question">💬 <strong>Discussion prompt:</strong> Should we formalize a "Waiting on Client" status in Monday? And set a follow-up SLA — e.g. if no response in 3 business days, Steve auto-follows up?</div>
-    </div>
-  </div>
-
- the UX doesn't change..."</div>
-      </div>
-      <div class="hiccup-impact">
-        <span class="impact-dot impact-amber"></span>
-        <strong>Impact:</strong> Adds an extra round-trip before the item can even be queued. Delays the confirm-receipt, delays dev assignment, and creates internal overhead that isn't visible to the client.
-      </div>
-      <div class="hiccup-question">💬 <strong>Discussion prompt:</strong> Would a lightweight intake form (even just a Gravity Form or a Monday intake template) reduce ambiguous submissions from the client side?</div>
-    </div>
-  </div>
-
-  <div class="stage-nav">
-    <button class="nav-btn" onclick="showStage(11)">← Previous</button>
-    <span class="stage-progress">Discussion</span>
     <button class="nav-btn primary" onclick="showStage(1)">↺ Start over</button>
   </div>
 </section>
@@ -1700,11 +1589,6 @@ Steve → Jen:
 </footer>
 
 <script>
-function toggleHiccup(id) {
-  const card = document.getElementById(id);
-  card.classList.toggle('open');
-}
-
 function showStage(n) {
   document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
